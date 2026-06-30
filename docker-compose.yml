@@ -1,6 +1,6 @@
 services:
   postgres_db:
-    image: postgres:15-alpine
+    image: postgres:18-alpine
     container_name: pets_postgres_container
     environment:
       POSTGRES_USER: ${DB_USERNAME}
@@ -9,7 +9,27 @@ services:
     ports:
       - "${DB_PORT}:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
+
+  api_backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pets_nestjs
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      DB_HOST: postgres_db
+      DB_PORT: 5432
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      PORT: ${PORT}
+    depends_on:
+      - postgres_db
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
 
 volumes:
   postgres_data:
