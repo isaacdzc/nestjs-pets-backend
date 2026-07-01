@@ -3,7 +3,11 @@ import { IsString, IsNotEmpty, IsEmail, IsInt, IsBoolean, IsOptional } from 'cla
 export class CreateUserDto {
     @IsString()
     @IsNotEmpty()
-    fullName!: string;
+    firstName!: string;
+
+    @IsString()
+    @IsNotEmpty()
+    lastName!: string;
 
     @IsEmail()
     @IsNotEmpty()
@@ -12,6 +16,10 @@ export class CreateUserDto {
     @IsInt()
     @IsNotEmpty()
     age!: number;
+
+    @IsString()
+    @IsNotEmpty()
+    password!: string;
 
     @IsBoolean()
     @IsOptional()

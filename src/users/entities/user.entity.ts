@@ -6,14 +6,20 @@ export class User {
     @PrimaryGeneratedColumn('uuid')
     id!: string;
 
-    @Column({ name: 'full_name', type: 'varchar', length: 100 })
-    fullName!: string;
+    @Column({ name: 'first_name', type: 'varchar', length: 50 })
+    firstName!: string;
+
+    @Column({ name: 'last_name', type: 'varchar', length: 50 })
+    lastName!: string;
 
     @Column({ type: 'varchar', unique: true, length: 150 })
     email!: string;
 
     @Column({ type: 'integer' })
     age!: number;
+
+    @Column({ type: 'varchar', length: 255 })
+    password!: string;
 
     @Column({ name: 'is_active', type: 'boolean', default: true })
     isActive!: boolean;
