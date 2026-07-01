@@ -1,13 +1,15 @@
-import { IsString, IsNotEmpty, IsDateString, IsNumber, IsOptional, IsUUID } from 'class-validator';
+import { IsString, IsNotEmpty, IsDateString, IsNumber, IsOptional, IsUUID, IsEnum } from 'class-validator';
+import { Species } from '../enums/species.enum';
+import { Gender } from '../enums/genre.enum';
 
 export class CreatePetDto {
     @IsString()
     @IsNotEmpty()
     name!: string;
 
-    @IsString()
+    @IsEnum(Species)
     @IsNotEmpty()
-    species!: string;
+    species!: Species;
 
     @IsDateString()
     @IsNotEmpty()
@@ -16,6 +18,10 @@ export class CreatePetDto {
     @IsNumber()
     @IsOptional()
     weight?: number;
+
+    @IsEnum(Gender)
+    @IsNotEmpty()
+    gender!: Gender;
 
     @IsUUID()
     @IsNotEmpty()
